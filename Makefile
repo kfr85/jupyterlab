@@ -19,5 +19,9 @@ start:
 stop:
 	@docker rm -f $(NAME)
 
+all-stop:
+	@docker ps | sed -e '1d' | awk '{print $1}' | xargs -I{} docker stop {}
+
 logs:
 	@docker logs $(NAME)
+
