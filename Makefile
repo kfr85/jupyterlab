@@ -11,6 +11,7 @@ restart: stop start
 start:
 	@docker run -itd --rm \
 		-p $(HOST_PORT):$(DOCKER_PORT) \
+		-v `pwd`/data:/home/jovyan/work \
 		--name $(NAME) \
 		$(NAME):$(VERSION)
 	@sleep 5
