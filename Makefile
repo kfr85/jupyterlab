@@ -25,3 +25,5 @@ all-stop:
 logs:
 	@docker logs $(NAME)
 
+login:
+	@docker exec -it $(NAME) bash
