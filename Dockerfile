@@ -6,7 +6,14 @@ LABEL maintainer="rusa <rusa.gedougawa@gmail.com>"
 
 USER root
 
+# All
 RUN apt-get -y update
+
+# Bash
+RUN pip install bash_kernel
+RUN python -m bash_kernel.install
+
+# Golang
 RUN apt-get -y install libzmq3-dev pkg-config
 
 ENV GO_VERSION=1.13.1 \
