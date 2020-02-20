@@ -28,3 +28,6 @@ logs:
 
 login:
 	@docker exec -it $(NAME) bash
+
+ps:
+	@docker ps -a

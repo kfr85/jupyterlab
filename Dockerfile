@@ -27,6 +27,9 @@ RUN go get -u github.com/gopherdata/gophernotes && \
     chown -R jovyan /home/jovyan/.local && \
     cp -r /go/src/github.com/gopherdata/gophernotes/kernel/* /home/jovyan/.local/share/jupyter/kernels/gophernotes
 
+RUN echo 'Defaults visiblepw'             >> /etc/sudoers
+RUN echo 'jovyan ALL=(ALL) NOPASSWD:ALL'  >> /etc/sudoers
+
 EXPOSE 8888
 
 USER jovyan
