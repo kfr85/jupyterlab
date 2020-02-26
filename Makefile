@@ -7,6 +7,7 @@ build:
 	docker build -t $(NAME):$(VERSION) .
 
 restart: stop start
+rebuild: stop build start
 
 start:
 	@docker run -itd --rm \

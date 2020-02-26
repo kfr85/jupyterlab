@@ -17,15 +17,15 @@ RUN python -m bash_kernel.install
 RUN apt-get -y install libzmq3-dev pkg-config
 
 ENV GO_VERSION=1.13.1 \
-    GOPATH=/go
+  GOPATH=/go
 ENV PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
 COPY --from=golang /usr/local/go/ /usr/local/go/
 
-RUN go get -u github.com/gopherdata/gophernotes && \
-    mkdir -p /home/jovyan/.local/share/jupyter/kernels/gophernotes && \
-    chown -R jovyan /home/jovyan/.local && \
-    cp -r /go/src/github.com/gopherdata/gophernotes/kernel/* /home/jovyan/.local/share/jupyter/kernels/gophernotes
+RUN go get -u github.com/gopherdata/gophernotes
+RUN mkdir -p /home/jovyan/.local/share/jupyter/kernels/gophernotes && \
+  chown -R jovyan /home/jovyan/.local && \
+  cp -r /go/src/github.com/gopherdata/gophernotes/kernel/* /home/jovyan/.local/share/jupyter/kernels/gophernotes
 
 RUN echo 'Defaults visiblepw'             >> /etc/sudoers
 RUN echo 'jovyan ALL=(ALL) NOPASSWD:ALL'  >> /etc/sudoers
@@ -34,4 +34,4 @@ EXPOSE 8888
 
 USER jovyan
 
-CMD ["jupyter", "lab", "--allow-root"]
+CMD ["jupyter", "lab", "--port=8888", "--allow-root", "--no-browser", "--ip=0.0.0.0", "--NotebookApp.token='rusagedougawa'"]
